@@ -1,4 +1,4 @@
-#trifecta {
+#pageContainer {
     display: grid;
     grid-template-columns: auto 60% 20%;
 }

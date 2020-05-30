@@ -37,7 +37,7 @@ function addRandomGreeting() {
 */
 function moveDiamondOnclick() {
     const diamond = document.getElementById('diamond');
-    var heightMax = document.getElementById('trifecta').offsetHeight;
+    var heightMax = document.getElementById('pageContainer').offsetHeight;
     heightMax = heightMax - diamond.offsetHeight;
 
     var changeTo = Math.floor(Math.random() * heightMax);
@@ -85,7 +85,7 @@ function diamondDescriptionUpdate(hitCount) {
     } else if (hitCount <= 100 ) {
         description.innerText = "You've hit the Diamond " + hitCount + 
         " times! Please spend your time NOT hitting the diamond, okay?"
-        
+
     } else {
         description.innerText = "You've hit the Diamond " + hitCount + 
         " times! There is something wrong with you. You did this for what?" +
