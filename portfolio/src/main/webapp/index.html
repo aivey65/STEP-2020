@@ -2,17 +2,106 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>'Portfolio' of Goals</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
+
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+    <div id="trifecta">
+        <!-- The left section of the webpage, containing the diamond. -->
+        <div>
+            <img id="diamond" src="/images/dia.gif" onclick="moveDiamondOnclick()">
+        </div>
+
+        <!-- Start of the middle contents of webpage. -->
+        <div>
+            <div id="intro">
+                <h1 id="header">Asha's Portfolio</h1>
+                <h3>This portfolio was created as during Asha's 2020 google internship.
+                    <br>
+                    Asha is a student at the University of Illinois (UIUC). She has a lot of random and unrelated interests, ranging 
+                    from sewing clothes, to playing video games, to writing. 
+                </h3>
+                    <br>
+                    <img id="portrait" src="images/asha-portrait.jpg" alt="Photo of Asha">    
+            </div>
+
+            <br>
+            <div id="rainbow"></div>
+            <br>
+
+            <div id="content">
+                <h1>My Current Personal Goals</h1>
+                <p>I have a lot of goals for this summer, the summer of 2020. In a way, because I have so many,
+                    it is a little unrealisic that I will accomplish them all. Still, I have hope. 
+                </p>
+
+                <h3>This Internship!</h3>
+                <p>
+                    I am looking forward to learning as much as I can during this time. It will be hard to get used 
+                    to doing this work from home, but I want to make the best of things, no matter what. What I am most 
+                    interested in is learning how to work with other people effectively. I am shy, but I feel like a 
+                    people person. I like working with others, and I think solutions come out easier and better when there
+                    are multiple people thinking about the problem and giving their perspective. That kind of collaboration 
+                    is essential for good work, in my opinion, and I think communication is a good skill to have in general. 
+                    There are plenty of systems in place at Google that support this, and I look forward to learning about 
+                    them.
+                </p>
+
+                <h3>Roller Skating</h3>
+                <p>One of my goals this summer is learning how to roller skate. I used to love roller skating as 
+                    a kid, though I haven't skated in a long time. More than 10 years probably. A couple months 
+                    ago, however, I went roller skating at a roller rink with some friends. I had an amazing time, 
+                    even though I wasn't there for very long. I forgot about it for a bit, but then, a couple weeks 
+                    later, there was a scene in one of my favorite shows about roller skating. There was roller skating 
+                    in the recent 'Birds of Prey' Harley Quinn movie, I started seeing people skating on social media. 
+                    It was becomming a trend. I finally decided to do the inevitable and bought myself a pair of skates. 
+                    I look forward to getting good at using them in my free time.
+
+                </p>
+
+                <h3>Japanese Language Learning</h3>
+                <p> I took Japanese in highschool for 4 years. It is a great language, and I had a lot of fun learning it. 
+                    I even got the opportunity to study abroad while I was studying. Japanese culture is so interesting, 
+                    and I enjoyed my time there. I have not been able to take Japanese classes in college due to all of 
+                    the class requirments I have for a degree. I have recently found an interest in linguistics in addition 
+                    to computer science, and because I would still like to be fluent in Japanese, I want to take some sort 
+                    of online class to help me brush up on what I learned in school. I also plan to take a Japanese class 
+                    in the fall, which I am really excited about.
+                </p>
+
+                <h3>Digital Art</h3>
+                <p>
+                    In addition to wanting to learn Japanese and how to roller skate, I would like to get into digital art. 
+                    I like being able to express myself creatively, with drawing or writing. It is very calming for me. I 
+                    am really excited to explore drawing digitally and seeing what I am capable of doing.
+                </p>
+
+                <h3>Mental Health</h3>
+                <p>
+                    I am in an on-going battle with myself. I am dissatisfied with myself, and try my best to get up and do 
+                    the things that I want to, but I struggle to find the motivation to do even the simplest of things, whether 
+                    that be getting out of bed, cooking dinner, organizing my room, or even talking with friends. I <i>am</i>really 
+                    excited about my opportunity at Google though, and I look forward to taking this new motivation to 
+                    improve my way of life.
+                </p>
+
+                <div id="greeting">
+                    <h2>Now for a cute button!</h2>
+                    <p>Click here to get a random message:</p>
+                    <button onclick="addRandomGreeting()">Hello</button>
+                    <div id="greeting-container"></div>
+                    <p>This little button is so cute, I will leave it in.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- The start of the left portion of the webpage, that shows the diamond game information. -->
+        <div>
+            <h1 id=diaGame></h1>
+            <h2 id=diaDescription></h2>
+        </div>
     </div>
   </body>
 </html>
