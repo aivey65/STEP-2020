@@ -2,9 +2,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>'Portfolio' of Goals</title>
+    <title>Asha's Summer 2020</title>
+
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -16,19 +18,19 @@
 
         <!-- Start of the middle contents of webpage. -->
         <div>
-            <div id="intro">
-                <h1 id="header">Asha's Portfolio</h1>
-                <h3>This portfolio was created as during Asha's 2020 google internship.
+            <div id="intro" class="pink">
+                <h1 id="header">Asha's Summer 2020</h1>
+                <h3>This portfolio was created during Asha's 2020 google internship.
                     <br>
                     Asha is a student at the University of Illinois (UIUC). She has a lot of random and unrelated interests, ranging 
                     from sewing clothes, to playing video games, to writing. 
                 </h3>
-                    <br>
-                    <img id="portrait" src="images/asha-portrait.jpg" alt="Photo of Asha">    
+                <br>
+                <img id="portrait" src="images/asha-portrait.jpg" alt="Photo of Asha">    
             </div>
 
             <br>
-            <div id="rainbow"></div>
+            <div class="rainbow"></div>
             <br>
 
             <div id="content">
@@ -63,7 +65,7 @@
 
                 <h3>Japanese Language Learning</h3>
                 <p> I took Japanese in highschool for 4 years. It is a great language, and I had a lot of fun learning it. 
-                    I even got the opportunity to study abroad while I was studying. Japanese culture is so interesting, 
+                    I even got the opportunity to study abroad. Japanese culture is so interesting, 
                     and I enjoyed my time there. I have not been able to take Japanese classes in college due to all of 
                     the class requirments I have. Because I would still like to be fluent in Japanese, I want to take some sort 
                     of online class to help me brush up on what I learned in school. I also plan to take a Japanese class 
@@ -94,12 +96,31 @@
                     <p>This little button is so cute, I will leave it in.</p>
                 </div>
             </div>
+
+            <br>
+            <div class="rainbow"></div>
+            <br>
+
+            <div class="pink" id="gifInfo">
+                <iframe src="https://giphy.com/embed/vFhFqWaJDXOMw" width=auto height="60px" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                <p>Diamond Gif <a href="https://giphy.com/gifs/animation-3d-diamond-vFhFqWaJDXOMw">from GIPHY</a></p>
+
+                <button id="infoButton" onclick="showMoreGifInfo()">More Information</button>
+                <div>
+                    <p id="information-container">This gif has been reposted on a couple different gif sharing 
+                        websites, with varying degrees of modification. This link is 
+                        to what I believe is the original, which includes a link to a tumblr 
+                        user <a href="https://vlknff.tumblr.com/post/60556034081/playing-with-shaders-vray">(vlknff)</a>
+                        that appears to be the creator.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <!-- The start of the left portion of the webpage, that shows the diamond game information. -->
         <div>
-            <h1 id=diaGame></h1>
-            <h2 id=diaDescription></h2>
+            <h1 id="diaTitle" class="diaGame"></h1>
+            <h2 id="diaDescription" class="diaGame"></h2>
         </div>
     </div>
   </body>

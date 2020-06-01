@@ -33,6 +33,23 @@ function addRandomGreeting() {
 }
 
 /**
+* Shows more information about the diamond gif used.
+*/
+function showMoreGifInfo() {
+    const infoContainer = document.getElementById('information-container');
+    const infoButton = document.getElementById('infoButton');
+
+    if (infoContainer.style.display === "none" || infoContainer.style.display === '') {
+        infoContainer.style.display = "inline";
+        infoButton.innerHTML = "Less Information"
+    } else {
+        infoContainer.style.display = "none";
+        infoButton.innerHTML = "More Information"
+    }
+}
+
+
+/**
 * Change height of diamond on page by randomly changing the diamond's top margin.
 */
 function moveDiamondOnclick() {
@@ -53,30 +70,30 @@ function moveDiamondOnclick() {
 * along with a little message.
 */
 function diamondDescriptionUpdate(hitCount) {
-    const diaGame = document.getElementById('diaGame');
+    const diaGame = document.getElementById('diaTitle');
     const description = document.getElementById('diaDescription');
 
     diaGame.innerText = "Hit the Diamond!";
 
     if (hitCount == 1) {
         description.innerText = "You've hit the Diamond " + hitCount + 
-        " time! This means nothing..."
+        " time! This has no meaning."
 
     } else if (hitCount <= 5) {
         description.innerText = "You've hit the Diamond " + hitCount + 
-        " times! This means nothing..."
+        " times! This has no meaning."
 
     } else if (hitCount <= 10) {
         description.innerText = "You've hit the Diamond " + hitCount + 
-        " times! This really means nothing. Please stop."
+        " times! This really means nothing. You can stop now."
 
     } else if (hitCount <= 15) {
         description.innerText = "You've hit the Diamond " + hitCount + 
-        " times! Do what you want, I guess, but it is a waste of time..."
+        " times! Do what you want, I guess, but this is just a waste of time."
 
     } else if (hitCount <= 20 ) {
         description.innerText = "You've hit the Diamond " + hitCount + 
-        " times! What? But why tho?"
+        " times! But why tho?"
 
     } else if (hitCount <= 30 ) {
         description.innerText = "You've hit the Diamond " + hitCount + 
@@ -88,7 +105,7 @@ function diamondDescriptionUpdate(hitCount) {
 
     } else {
         description.innerText = "You've hit the Diamond " + hitCount + 
-        " times! There is something wrong with you. You did this for what?" +
+        " times! You did this for what?" +
         " Please, and I mean PLEASE, stop hitting the diamond. You have" +
         " nothing more to gain from this."
     }

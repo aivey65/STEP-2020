@@ -3,8 +3,14 @@
     grid-template-columns: auto 60% 20%;
 }
 
-#diagame {
+#diaTitle {    
     margin-top: 100px;
+}
+
+.diaGame {
+    text-align: center;
+    display: block;
+    padding-right: 50px;
 }
 
 #diamond {
@@ -21,11 +27,10 @@
     cursor: help;
 }
 
-#intro {    
+.pink {    
     margin-left:auto;
     margin-right: auto;
     width: 650px;
-    display:block;
     text-align: center;
     background-color: #ffb3ba;
     padding: 50px;
@@ -33,7 +38,7 @@
 }
 
 #header {
-    size: 400px;
+    size: 600px;
     text-align: center;
 }
 
@@ -58,7 +63,7 @@
 * blue = #bae1ff
 * black = #323232
 */
-#rainbow {
+.rainbow {
     background-color: #ffdfba;
     background-image: linear-gradient(to right, #bae1ff, #baffc9, #ffffba, #ffb3ba , #ffdfba, #baffc9, #bae1ff);
     margin-right: auto;
@@ -79,13 +84,19 @@
     border-radius: 0.5rem;
 }
 
+#information-container {
+    display: none;
+    margin-top: 5px;
+}
+
 body {
     background-color: #bae1ff;
     color: #363333;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 h3 {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 #greeting {
