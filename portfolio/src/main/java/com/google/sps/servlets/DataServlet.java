@@ -18,7 +18,6 @@ import java.lang.StringBuffer;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;   
-import java.util.Arrays;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +30,9 @@ public class DataServlet extends HttpServlet {
     private ArrayList<Comment> allComments = new ArrayList<Comment>();
 
     /**
-    * Class to organize comments for more detailed displays. 
+    * Class to organize comments for more detailed displays. By creating 
+    * another class, adding new parameters and information to keep track 
+    * of may be easier.
     */
     private static class Comment {
         private String name;
