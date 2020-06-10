@@ -138,7 +138,7 @@ function displayComment() {
             newHTML = "<br><p class=\"comment-style-1\">"
             + allComments[i].name
             + " - "
-            + timeSince(allComments[i].date, currentTime)
+            + timeSince(allComments[i].date.dateTime, currentTime.dateTime)
             + "</p><br><p class=\"comment-style-2\">"
             + allComments[i].comment
             + "</p><br><hr> "
@@ -156,23 +156,18 @@ function displayComment() {
  * @return string telling how long ago the comment was posted in 
  * relation to the current time.
  */
- function timeSince(commentTimeString, currentTimeString) {
-    // Format: "mm,HH,dd,MM,yyyy" or "minute, hour, day, month, year"
-    var commentTimeArray = commentTimeString.split(',');
-    var currentTimeArray = currentTimeString.split(',');
+ function timeSince(commentTime, currentTime) {
     var timeDifference = "";
     var timeUnit = "";
 
-    // Just in case the time strings are not formatted correctly. However, this should never be the case, since they are formatted by the servlet.
-    if (commentTimeArray.length != 5 || currentTimeArray.length != 5) {
-        return "some time ago";
-    }
-
-    // Date constructor takes months in range of 0 to 11, so the second parameter subtracts 1.
+    /**
+     * Date constructor takes months in range of 0 to 11, so the second parameter subtracts 1.
+     * Format: year, month, day, hour, minute
+    */
     var commentDate = new Date(
-        commentTimeArray[4], commentTimeArray[3] - 1, commentTimeArray[2], commentTimeArray[1], commentTimeArray[0]);
+        commentTime.date.year, commentTime.date.month - 1, commentTime.date.day, commentTime.time.hour, commentTime.time.minute);
     var currentDate = new Date(
-        currentTimeArray[4], currentTimeArray[3] - 1, currentTimeArray[2], currentTimeArray[1], currentTimeArray[0]);
+        currentTime.date.year, currentTime.date.month - 1, currentTime.date.day, currentTime.time.hour, currentTime.time.minute);
 
     var seconds = Math.floor(
         Math.abs((currentDate.getTime() / MILLISECONDS_IN_SECOND) - (commentDate.getTime() / MILLISECONDS_IN_SECOND)));

@@ -37,7 +37,7 @@ public class DataServlet extends HttpServlet {
     private static class Comment {
         private String name;
         private String comment;
-        private String date;
+        private ZonedDateTime date;
 
         Comment(String newName, String newComment) {
             name = newName;
@@ -76,9 +76,7 @@ public class DataServlet extends HttpServlet {
     }
 
     /* Returns current time in UTC */
-    private static String getDateTime() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm,HH,dd,MM,yyyy");  
-        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));  
-        return dtf.format(now);
+    private static ZonedDateTime getDateTime() {
+        return ZonedDateTime.now(ZoneId.of("UTC")); 
     }
 }
