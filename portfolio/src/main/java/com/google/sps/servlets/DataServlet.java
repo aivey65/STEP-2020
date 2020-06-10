@@ -13,11 +13,11 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
-
-import java.lang.StringBuffer;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;  
-import java.time.LocalDateTime;   
+import java.time.ZonedDateTime;   
+import java.time.ZoneId;   
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    private ArrayList<Comment> allComments = new ArrayList<Comment>();
+    final private ArrayList<Comment> allComments = new ArrayList<Comment>();
 
     /**
     * Class to organize comments for more detailed displays. By creating 
@@ -42,10 +42,7 @@ public class DataServlet extends HttpServlet {
         Comment(String newName, String newComment) {
             name = newName;
             comment = newComment;
-
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("LLL dd, yyyy HH:mm:ss");  
-            LocalDateTime now = LocalDateTime.now();  
-            date = dtf.format(now);  
+            date = getDateTime(); 
         }
 
         /** @return a formatted string with all of the comment information. */
@@ -63,33 +60,25 @@ public class DataServlet extends HttpServlet {
 
         allComments.add(entry);
         response.sendRedirect("/index.html");
-        return;
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String allCommentsAsStrings = getCommentsAsStrings();
-        response.setContentType("text/html;");
-        response.getWriter().println(allCommentsAsStrings);
+        Gson gson = new Gson();
+        String commentJsonString = gson.toJson(allComments);
+        String retrieveTimeJsonString = gson.toJson(getDateTime());
+
+        String dataResponse = "{\"commentArray\":" + commentJsonString 
+                            + ",\"retrieveTime\":" + retrieveTimeJsonString
+                            + "}";
+        response.setContentType("application/json");
+        response.getWriter().println(dataResponse);
     }
 
-    /**
-    * @return a string of all the properly formatted comments to be directly added to the HTML file.
-    */
-    private String getCommentsAsStrings() {
-        StringBuffer buffer = new StringBuffer();
-
-        for (Comment comment : allComments) {
-            buffer.append("<br><p class=\"comment-style-1\">");
-            buffer.append(comment.name);
-            buffer.append("</p><br><p class=\"comment-style-2\">");
-            buffer.append(comment.comment);
-            buffer.append("<br>(");
-            buffer.append(comment.date);
-            
-            buffer.append(")</p><br><hr> ");
-        }
-
-        return buffer.toString();
+    /* Returns current time in UTC */
+    private static String getDateTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm,HH,dd,MM,yyyy");  
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));  
+        return dtf.format(now);
     }
 }

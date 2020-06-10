@@ -12,8 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-var diamondHitCount = 0;
+const MILLISECONDS_IN_SECOND = 1000;
+const SECONDS_IN_MINUTE = 60;
+const SECONDS_IN_HOUR = 3600;
+const SECONDS_IN_DAY = 86400;
+const SECONDS_IN_AVG_MONTH = 2628288;
+const SECONDS_IN_YEAR = 31536000;
 
+const MINUTES_IN_HOUR = 60;
+const HOURS_IN_DAY = 24;
+const MAX_DAYS_IN_MONTH = 31;
+const MONTHS_IN_YEAR = 12;
+
+var diamondHitCount = 0;
 
 /**
  * Adds a random greeting to the page.
@@ -112,11 +123,86 @@ function diamondDescriptionUpdate(hitCount) {
 }
 
 /**
-* Temporary function that displays comment on page. This does not yet save comments.
+* Temporary function that formats and displays comment on page. This does not yet save comments.
 */
 function displayComment() {
-    fetch('/data').then(response => response.text()).then((message) => {
-    var commentHTML = document.getElementById('comment-container');
-    commentHTML.innerHTML = message;
-  });
+    fetch('/data').then(response => response.text()).then((dataResponse) => {
+        const commentHTML = document.getElementById('comment-container');
+        var commentData = JSON.parse(dataResponse);
+
+        var allComments = commentData.commentArray;
+        var currentTime = commentData.retrieveTime;
+        var newHTML = "";
+
+        for (var i = 0; i < allComments.length; i++) {
+            newHTML = "<br><p class=\"comment-style-1\">"
+            + allComments[i].name
+            + " - "
+            + timeSince(allComments[i].date, currentTime)
+            + "</p><br><p class=\"comment-style-2\">"
+            + allComments[i].comment
+            + "</p><br><hr> "
+            + newHTML;
+        }     
+
+        commentHTML.innerHTML = newHTML;
+    });
+}
+
+/**
+ * Function inspired by solutions on this StackOverflow post: 
+ * https://stackoverflow.com/questions/3177836/how-to-format-time-since-xxx-e-g-4-minutes-ago-similar-to-stack-exchange-site
+ * 
+ * @return string telling how long ago the comment was posted in 
+ * relation to the current time.
+ */
+ function timeSince(commentTimeString, currentTimeString) {
+    // Format: "mm,HH,dd,MM,yyyy" or "minute, hour, day, month, year"
+    var commentTimeArray = commentTimeString.split(',');
+    var currentTimeArray = currentTimeString.split(',');
+    var timeDifference = "";
+    var timeUnit = "";
+
+    // Just in case the time strings are not formatted correctly. However, this should never be the case, since they are formatted by the servlet.
+    if (commentTimeArray.length != 5 || currentTimeArray.length != 5) {
+        return "some time ago";
+    }
+
+    // Date constructor takes months in range of 0 to 11, so the second parameter subtracts 1.
+    var commentDate = new Date(
+        commentTimeArray[4], commentTimeArray[3] - 1, commentTimeArray[2], commentTimeArray[1], commentTimeArray[0]);
+    var currentDate = new Date(
+        currentTimeArray[4], currentTimeArray[3] - 1, currentTimeArray[2], currentTimeArray[1], currentTimeArray[0]);
+
+    var seconds = Math.floor(
+        Math.abs((currentDate.getTime() / MILLISECONDS_IN_SECOND) - (commentDate.getTime() / MILLISECONDS_IN_SECOND)));
+    var timeDifference = Math.floor(seconds / SECONDS_IN_MINUTE);
+
+    if (timeDifference < MINUTES_IN_HOUR) {
+        timeUnit = "minute"
+    } else {
+        timeDifference = Math.floor(seconds / SECONDS_IN_HOUR);
+        if (timeDifference < HOURS_IN_DAY) {
+            timeUnit = "hour";
+        } else {
+            timeDifference = Math.floor(seconds / SECONDS_IN_DAY);
+            if (timeDifference < MAX_DAYS_IN_MONTH) {
+                timeUnit = "day";
+            } else {
+                timeDifference = Math.floor(seconds / SECONDS_IN_AVG_MONTH);
+                if (timeDifference < MONTHS_IN_YEAR) {
+                    timeUnit = "month";
+                } else {
+                    timeDifference = Math.floor(seconds / SECONDS_IN_YEAR);
+                    timeUnit = "year";
+                }
+            }
+        }
+    }
+
+    if (timeDifference == "1") {
+        return timeDifference + " " + timeUnit + " ago";
+    } else {
+        return timeDifference + " " + timeUnit + "s ago";
+    }
 }
