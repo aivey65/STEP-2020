@@ -12,18 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const MILLISECONDS_IN_SECOND = 1000;
-const SECONDS_IN_MINUTE = 60;
-const SECONDS_IN_HOUR = 3600;
-const SECONDS_IN_DAY = 86400;
-const SECONDS_IN_AVG_MONTH = 2628288;
-const SECONDS_IN_YEAR = 31536000;
-
-const MINUTES_IN_HOUR = 60;
-const HOURS_IN_DAY = 24;
-const MAX_DAYS_IN_MONTH = 31;
-const MONTHS_IN_YEAR = 12;
-
 var diamondHitCount = 0;
 
 /**
