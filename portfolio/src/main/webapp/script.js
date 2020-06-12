@@ -114,9 +114,8 @@ function diamondDescriptionUpdate(hitCount) {
 * Temporary function that formats and displays comment on page. This does not yet save comments.
 */
 function displayComment() {
-    fetch('/data').then(response => response.text()).then((dataResponse) => {
+    fetch('/data').then(response => response.json()).then((commentData) => {
         const commentHTML = document.getElementById('comment-container');
-        var commentData = JSON.parse(dataResponse);
         var newHTML = "";
 
         for (var i = 0; i < commentData.length; i++) {
