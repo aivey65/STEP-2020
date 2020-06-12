@@ -15,9 +15,6 @@
 package com.google.sps.servlets;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;  
-import java.time.ZonedDateTime;   
-import java.time.ZoneId;   
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +49,6 @@ public class DataServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String comment = request.getParameter("comment");
-
         Comment entry = new Comment(name, comment);
 
         allComments.add(entry);
