@@ -129,75 +129,17 @@ function displayComment() {
     fetch('/data').then(response => response.text()).then((dataResponse) => {
         const commentHTML = document.getElementById('comment-container');
         var commentData = JSON.parse(dataResponse);
-
-        var allComments = commentData.commentArray;
-        var currentTime = commentData.retrieveTime;
         var newHTML = "";
 
-        for (var i = 0; i < allComments.length; i++) {
+        for (var i = 0; i < commentData.length; i++) {
             newHTML = "<br><p class=\"comment-style-1\">"
-            + allComments[i].name
-            + " - "
-            + timeSince(allComments[i].date.dateTime, currentTime.dateTime)
+            + commentData[i].name
             + "</p><br><p class=\"comment-style-2\">"
-            + allComments[i].comment
+            + commentData[i].comment
             + "</p><br><hr> "
             + newHTML;
         }     
 
         commentHTML.innerHTML = newHTML;
     });
-}
-
-/**
- * Function inspired by solutions on this StackOverflow post: 
- * https://stackoverflow.com/questions/3177836/how-to-format-time-since-xxx-e-g-4-minutes-ago-similar-to-stack-exchange-site
- * 
- * @return string telling how long ago the comment was posted in 
- * relation to the current time.
- */
- function timeSince(commentTime, currentTime) {
-    var timeDifference = "";
-    var timeUnit = "";
-
-    /**
-     * Date constructor takes months in range of 0 to 11, so the second parameter subtracts 1.
-     * Format: year, month, day, hour, minute
-    */
-    var commentDate = new Date(
-        commentTime.date.year, commentTime.date.month - 1, commentTime.date.day, commentTime.time.hour, commentTime.time.minute);
-    var currentDate = new Date(
-        currentTime.date.year, currentTime.date.month - 1, currentTime.date.day, currentTime.time.hour, currentTime.time.minute);
-
-    var seconds = Math.floor(
-        Math.abs((currentDate.getTime() / MILLISECONDS_IN_SECOND) - (commentDate.getTime() / MILLISECONDS_IN_SECOND)));
-    var timeDifference = Math.floor(seconds / SECONDS_IN_MINUTE);
-
-    if (timeDifference < MINUTES_IN_HOUR) {
-        timeUnit = "minute"
-    } else {
-        timeDifference = Math.floor(seconds / SECONDS_IN_HOUR);
-        if (timeDifference < HOURS_IN_DAY) {
-            timeUnit = "hour";
-        } else {
-            timeDifference = Math.floor(seconds / SECONDS_IN_DAY);
-            if (timeDifference < MAX_DAYS_IN_MONTH) {
-                timeUnit = "day";
-            } else {
-                timeDifference = Math.floor(seconds / SECONDS_IN_AVG_MONTH);
-                if (timeDifference < MONTHS_IN_YEAR) {
-                    timeUnit = "month";
-                } else {
-                    timeDifference = Math.floor(seconds / SECONDS_IN_YEAR);
-                    timeUnit = "year";
-                }
-            }
-        }
-    }
-
-    if (timeDifference == "1") {
-        return timeDifference + " " + timeUnit + " ago";
-    } else {
-        return timeDifference + " " + timeUnit + "s ago";
-    }
 }
