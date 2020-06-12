@@ -14,7 +14,6 @@
 
 var diamondHitCount = 0;
 
-
 /**
  * Adds a random greeting to the page.
  */
@@ -37,7 +36,7 @@ function addRandomGreeting() {
 */
 function showMoreGifInfo() {
     const infoContainer = document.getElementById('information-container');
-    const infoButton = document.getElementById('infoButton');
+    const infoButton = document.getElementById('info-button');
 
     if (infoContainer.style.display === "none" || infoContainer.style.display === '') {
         infoContainer.style.display = "inline";
@@ -54,7 +53,7 @@ function showMoreGifInfo() {
 */
 function moveDiamondOnclick() {
     const diamond = document.getElementById('diamond');
-    var heightMax = document.getElementById('pageContainer').offsetHeight;
+    var heightMax = document.getElementById('page-container').offsetHeight;
     heightMax = heightMax - diamond.offsetHeight;
 
     var changeTo = Math.floor(Math.random() * heightMax);
@@ -70,8 +69,8 @@ function moveDiamondOnclick() {
 * along with a little message.
 */
 function diamondDescriptionUpdate(hitCount) {
-    const diaGame = document.getElementById('diaTitle');
-    const description = document.getElementById('diaDescription');
+    const diaGame = document.getElementById('dia-title');
+    const description = document.getElementById('dia-description');
 
     diaGame.innerText = "Hit the Diamond!";
 
@@ -109,4 +108,25 @@ function diamondDescriptionUpdate(hitCount) {
         " Please, and I mean PLEASE, stop hitting the diamond. You have" +
         " nothing more to gain from this."
     }
+}
+
+/**
+* Temporary function that formats and displays comment on page. This does not yet save comments.
+*/
+function displayComment() {
+    fetch('/data').then(response => response.json()).then((commentData) => {
+        const commentHTML = document.getElementById('comment-container');
+        var newHTML = "";
+
+        for (var i = 0; i < commentData.length; i++) {
+            newHTML = "<br><p class=\"comment-style-1\">"
+            + commentData[i].name
+            + "</p><br><p class=\"comment-style-2\">"
+            + commentData[i].comment
+            + "</p><br><hr> "
+            + newHTML;
+        }     
+
+        commentHTML.innerHTML = newHTML;
+    });
 }

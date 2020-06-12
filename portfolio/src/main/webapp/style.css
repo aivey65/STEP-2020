@@ -1,13 +1,15 @@
-#pageContainer {
+#page-container {
     display: grid;
-    grid-template-columns: auto 60% 20%;
+    grid-template-columns: auto auto auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-#diaTitle {    
+#dia-title {    
     margin-top: 100px;
 }
 
-.diaGame {
+.dia-game {
     text-align: center;
     display: block;
     padding-right: 50px;
@@ -17,10 +19,11 @@
     margin-top: 100px;
     text-align: center;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 50px;
+    margin-right: 50px;
     height:80px;
     width:auto;
+    padding: "50px";
 }
 
 #diamond:hover {
@@ -110,22 +113,57 @@ h3 {
     margin-top: 20px;
 }
 
-button {
+#right-side {
+    width: 350px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+}
+
+
+#comment-form {
+    background-color: #ffdfba;
+    border-radius: 0.5rem;
+    padding: 50px;
+    text-align: left;
+}
+
+input {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+textarea {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.button {
     color: #363333;
     background-color: #baffc9;
     border: 0;
     border-radius: 0.5rem;
     text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 10px;
+    margin-bottom: 16px;
 }
 
-button:hover {
+.button:hover {
     cursor: cell;
 }
 
-button:active {
+.button:active {
     cursor: crosshair;
     background-color: #ffb3ba;
     text-decoration: none;
     border: 0;
     outline:none;
+}
+
+.comment-style-1 {
+    margin: 0px;
+    color:#8e8e8e;
+}
+
+.comment-style-2 {
+    margin: 0px;
 }
