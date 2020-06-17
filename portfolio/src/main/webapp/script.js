@@ -111,10 +111,13 @@ function diamondDescriptionUpdate(hitCount) {
 }
 
 /**
-* Temporary function that formats and displays comment on page. This does not yet save comments.
+* Function that recieves the indicated number of comments from datastore and displays the result after formatting.
 */
-function displayComment() {
-    fetch('/data').then(response => response.json()).then((commentData) => {
+function displayComments() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('comment-number') || 5;
+    
+    fetch('/data?comment-number=' + query).then(response => response.json()).then((commentData) => {
         const commentHTML = document.getElementById('comment-container');
         var newHTML = "";
 
@@ -129,4 +132,12 @@ function displayComment() {
 
         commentHTML.innerHTML = newHTML;
     });
+}
+
+/**
+* Function that deletes all comments stored in Datastore.
+*/
+async function deleteComments() {
+    await fetch('/delete-data');
+    displayComments();
 }
