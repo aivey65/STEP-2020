@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
   </head>
 
-  <body onload="displayComment()">
+  <body onload="displayComments()">
+
     <div id="page-container">
         <!-- The left section of the webpage, containing the diamond. -->
         <div>
@@ -137,8 +138,21 @@
                 <br>
                 <br>
                 <h1>Comments</h1>
+                <form>
+                    <h3>Comments to Show: 
+                        <select name="max-comments" id="max-comments">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </h3>
+                    <input onclick="displayComments()" class="button" type="submit"/>
+                </form>
                 <hr>
                 <div id="comment-container"></div>
+                <br>
+                <button id="delete-button" onclick="deleteComments()">Delete All Comments</button>
             </div>
         </div>
     </div>

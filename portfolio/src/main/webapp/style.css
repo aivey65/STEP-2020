@@ -159,6 +159,27 @@ textarea {
     outline:none;
 }
 
+#comment-number {
+    color: #363333;
+    background-color: white;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 5px;
+}
+
+#comment-number:hover {
+    cursor:cell;
+}
+
+#comment-number:active {
+    cursor: crosshair;
+    background-color: #ffb3ba;
+    text-decoration: none;
+    border: 0;
+    outline:none;
+}
+
 .comment-style-1 {
     margin: 0px;
     color:#8e8e8e;
@@ -166,4 +187,17 @@ textarea {
 
 .comment-style-2 {
     margin: 0px;
+}
+
+#delete-button {
+    color: #363333;
+    background-color: #ffb3ba;
+    border: 0;
+    border-radius: 0.5rem;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 10px;
+}
+
+.button:hover {
+    cursor: cell;
 }
