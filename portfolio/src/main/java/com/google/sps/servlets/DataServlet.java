@@ -16,7 +16,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Query;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -55,17 +55,17 @@ public class DataServlet extends HttpServlet {
         String name = request.getParameter("name");
         String comment = request.getParameter("comment");
 
-        Entity taskEntity = new Entity("Task");
-        taskEntity.setProperty("name", name);
-        taskEntity.setProperty("comment", comment);
+        Entity commentEntity = new Entity("Comment");
+        commentEntity.setProperty("name", name);
+        commentEntity.setProperty("comment", comment);
 
-        datastore.put(taskEntity);
+        datastore.put(commentEntity);
         response.sendRedirect("/index.html");
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String input = request.getParameter("comment-number");
+        String input = request.getParameter("max-comments");
         int limit = 0;
         
         try {
@@ -75,20 +75,15 @@ public class DataServlet extends HttpServlet {
             return;
         }
 
-        Query query = new Query("Task");
-        PreparedQuery results = datastore.prepare(query);
+        Query query = new Query("Comment");
+        Iterable<Entity> results = datastore.prepare(query).asIterable(FetchOptions.Builder.withLimit(limit));
         
         ArrayList<Comment> allComments = new ArrayList<Comment>();
-        int index = 0;
-        for (Entity entity : results.asIterable()) {
-            if (index >= limit) {
-                break;
-            }
+        for (Entity entity : results) {
             String name = (String) entity.getProperty("name");
             String comment = (String) entity.getProperty("comment");
 
             allComments.add(new Comment(name, comment));
-            index++;
         }
         
         Gson gson = new Gson();

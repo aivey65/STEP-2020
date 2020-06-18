@@ -115,9 +115,9 @@ function diamondDescriptionUpdate(hitCount) {
 */
 function displayComments() {
     const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('comment-number') || 5;
+    const query = urlParams.get('max-comments') || 5;
     
-    fetch('/data?comment-number=' + query).then(response => response.json()).then((commentData) => {
+    fetch('/data?max-comments=' + query).then(response => response.json()).then((commentData) => {
         const commentHTML = document.getElementById('comment-container');
         var newHTML = "";
 

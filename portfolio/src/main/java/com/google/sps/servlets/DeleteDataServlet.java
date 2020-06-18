@@ -30,7 +30,7 @@ public class DeleteDataServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        Query query = new Query("Task");
+        Query query = new Query("Comment");
         PreparedQuery results = datastore.prepare(query);
         
         for (Entity entity : results.asIterable()) {
