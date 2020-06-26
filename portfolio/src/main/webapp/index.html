@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Asha's Summer 2020</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" type="image/png" href="/images/diaFavicon.png"/>
     <script src="script.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3NHIdmSicgn9KVf-fPq0JdHuwbb3tsC0&callback=initMap&v=weekly"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet"/>
   </head>
 
-  <body onload="displayComments()">
+  <body onload="onload()">
 
     <div id="page-container">
         <!-- The left section of the webpage, containing the diamond. -->
@@ -98,21 +100,40 @@
                 </div>
             </div>
 
+ 	        <br>
+            <div class="rainbow"></div>
+            <br>
+
+            <div class="orange" id="map-container">
+                <h1>Map of my Home Town</h1>
+                <h3>This is a map of my hometown. The locations on the map are places I like to order food from!</h3>
+                <br>
+                <div id="cool-map"></div>
+            </div>
+
             <br>
             <div class="rainbow"></div>
             <br>
 
             <div class="pink" id="gif-info">
-                <iframe src="https://giphy.com/embed/vFhFqWaJDXOMw" width=auto height="60px" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                <p>Diamond Gif <a href="https://giphy.com/gifs/animation-3d-diamond-vFhFqWaJDXOMw">from GIPHY</a></p>
-
-                <button class="button" id="info-button" onclick="showMoreGifInfo()">More Information</button>
                 <div>
-                    <p id="information-container">This gif has been reposted on a couple different gif sharing 
-                        websites, with varying degrees of modification. This link is 
-                        to what I believe is the original, which includes a link to a tumblr 
-                        user <a href="https://vlknff.tumblr.com/post/60556034081/playing-with-shaders-vray">(vlknff)</a>
-                        that appears to be the creator.
+                    <iframe src="https://giphy.com/embed/vFhFqWaJDXOMw" width=auto height="60px" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                    <p>Diamond Gif <a href="https://giphy.com/gifs/animation-3d-diamond-vFhFqWaJDXOMw">from GIPHY</a></p>
+
+                    <button class="button" id="info-button" onclick="showMoreGifInfo()">More Information</button>
+                    <div>
+                        <p id="information-container">This gif has been reposted on a couple different gif sharing 
+                            websites, with varying degrees of modification. This link is 
+                            to what I believe is the original, which includes a link to a tumblr 
+                            user <a href="https://vlknff.tumblr.com/post/60556034081/playing-with-shaders-vray">(vlknff)</a>
+                            that appears to be the creator.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <img src="/images/diaFavicon.png">
+                    <p>
+                        <a target="_blank" href="https://icons8.com/icons/set/diamond">Diamond icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
                     </p>
                 </div>
             </div>
@@ -125,7 +146,7 @@
 
             <br>
 
-            <div id="comment-form">
+            <div id="comment-form" class="orange">
                 <h1 margin-top:"0px">Leave a Comment!</h1>
                 <form action="/data" method="POST">
                     <h3>Name</h3>

@@ -113,6 +113,22 @@ h3 {
     margin-top: 20px;
 }
 
+#cool-map {
+    height: 500px;
+    width: 650px;
+    position: relative;
+    border-radius: 0.5rem;
+}
+
+#map-container {
+    width: 650px;
+}
+
+#gif-info {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
 #right-side {
     width: 350px;
     margin-left: 50px;
@@ -120,11 +136,15 @@ h3 {
     text-align: center;
 }
 
-
-#comment-form {
+.orange {
     background-color: #ffdfba;
     border-radius: 0.5rem;
     padding: 50px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+#comment-form {
     text-align: left;
 }
 
