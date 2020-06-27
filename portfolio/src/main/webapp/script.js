@@ -155,7 +155,7 @@ async function deleteComments() {
  function initMap() {
   // The map, centered at Uluru
     var map = new google.maps.Map(
-      document.getElementById('cool-map'), {
+      document.getElementById('custom-map'), {
           zoom: 13, 
           center: {lat: 41.88831, lng: -87.7901},
           backgroundColor: "#ffdfba",
@@ -237,7 +237,7 @@ async function deleteComments() {
  }
 
 /**
- * Array containing all of the style customizations. I wish it were shorter too.
+ * Array containing all of the style customizations.
  */
  var stylesArray = [
   {
