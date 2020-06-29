@@ -5,10 +5,18 @@
     <title>Asha's Summer 2020</title>
 
     <link rel="stylesheet" href="style.css"/>
-    <link rel="icon" type="image/png" href="/images/diaFavicon.png"/>
     <script src="script.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3NHIdmSicgn9KVf-fPq0JdHuwbb3tsC0&callback=initMap&v=weekly"></script>
+    <link rel="icon" type="image/png" href="/images/diaFavicon.png"/>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet"/>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(displayPieChart);
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3NHIdmSicgn9KVf-fPq0JdHuwbb3tsC0&callback=initMap&v=weekly"></script>
   </head>
 
   <body onload="onload()">
@@ -131,10 +139,16 @@
                     </div>
                 </div>
                 <div>
-                    <img src="/images/diaFavicon.png">
+                    <img src="/images/diaFavicon.png" width=auto height="60px">
                     <p>
                         <a target="_blank" href="https://icons8.com/icons/set/diamond">Diamond icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
                     </p>
+                </div>
+                <div>
+                    <a data-flickr-embed="true" href="https://www.flickr.com/photos/cynthiasmoot/38437425020/in/photostream/" title="Poké Bop Boba Tea">
+                    <img src="https://live.staticflickr.com/4609/38437425020_57b3aace76_s.jpg" width="auto" height="60px" alt="Poké Bop Boba Tea">
+                    <p>Boba image by Cynthia Smoot on Flickr</p></a>
+                    <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>
@@ -174,6 +188,59 @@
                 <div id="comment-container"></div>
                 <br>
                 <button id="delete-button" onclick="deleteComments()">Delete All Comments</button>
+            </div>
+            <br>
+            <div class="orange">
+                <h1>Milk Tea Drinks</h1>
+                <img src="/images/boba.jpg" width="250px" height="auto">
+                <p>
+                    There are tons of delicious milk tea flavors. One of my favorite drinks is oolong milk tea with boba! 
+                    I am curious to see which flavors of milk tea are most preferred! 
+                    <br>
+                    <br>
+                    <b>Out of the following choices, which milk tea flavor do you prefer more? Select one:</b>
+                </p>
+                <form action="/pie-chart" method="POST">
+                    <h3>Preferred Milk Tea Flavor</h3>
+                    <div><input type="radio" name="flavor" value="Classic Black Milk Tea" required>Classic Black Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Brown Sugar Milk Tea" required>Brown Sugar Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Oolong Milk Tea" required>Oolong Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Earl Grey Milk Tea" required>Earl Grey Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Jasmine Milk Tea" required>Jasmine Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Matcha Milk Tea" required>Matcha Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Taro Milk Tea" required>Taro Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Coffee Milk Tea" required>Coffee Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Thai Milk Tea" required>Thai Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Hazelnut Milk Tea" required>Hazelnut Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Vanilla Milk Tea" required>Vanilla Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Salted Caramel Milk Tea" required>Salted Caramel Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Melon Milk Tea" required>Melon Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Strawberry Milk Tea" required>Strawberry Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Mango Milk Tea" required>Mango Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Lychee Milk Tea" required>Lychee Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="I Don't Like Milk Tea" required>I Don't Like Milk Tea</div>
+                    <div><input type="radio" name="flavor" value="Other" required>Other</div>
+                    
+                    <h3>Preferred Topping</h3>
+                    <div><input type="radio" name="topping" value="Boba" required>Boba</div>
+                    <div><input type="radio" name="topping" value="Jelly" required>Jelly</div>
+                    <div><input type="radio" name="topping" value="Pudding" required>Pudding</div>
+                    <div><input type="radio" name="topping" value="Cheese Foam" required>Cheese Foam</div>
+                    <div><input type="radio" name="topping" value="Red Bean" required>Red Bean</div>
+                    <div><input type="radio" name="topping" value="I Don't like Toppings" required>I Don't like Toppings</div>
+                    <div><input type="radio" name="topping" value="Other" required>Other</div>
+                    <br>
+                    <input class="button" type="submit"/>
+                </form>
+                <br>
+                <hr>
+                <br>
+                <h3>Favorite Flavor Votes</h3>
+                <div id="flavor-chart"></div>
+                <br>
+                <h3>Favorite Topping Votes</h3>
+                <div id="topping-chart"></div>
+
             </div>
         </div>
     </div>

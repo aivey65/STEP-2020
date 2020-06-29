@@ -150,6 +150,56 @@ async function deleteComments() {
 }
 
 /**
+ * Creates a chart to visualize user data about boba.
+ */
+function displayPieChart() {
+    fetch('/pie-chart').then(response => response.json()).then((voteData) => {
+        //Options used to create the two charts
+        const options = {
+            pieHole: 0.4,
+            legend: 'none',
+            backgroundColor: '#ffdfba',
+            fontName: 'Josefin Sans',
+            fontSize: 12,
+            pieSliceTextStyle: {
+                color: '#323232',
+            },
+            chartArea: {
+                left: 10,
+                top: 10,
+                width: 250,
+                height:260
+            },
+            colors: ['#ffb3ba', '#ffffba', '#baffc9', '#bae1ff', '#e0d6ff', '#ffe4e1', '#cdc9c9']
+        };
+
+        // Create chart for flavors
+        const flavorData = new google.visualization.DataTable();
+        flavorData.addColumn('string', 'flavor');
+        flavorData.addColumn('number', 'votes');
+        Object.keys(voteData.flavorVotes).forEach((flavor) => {
+            flavorData.addRow([flavor, voteData.flavorVotes[flavor]]);
+        });
+
+        const flavorChart = new google.visualization.PieChart(
+            document.getElementById('flavor-chart'));
+        flavorChart.draw(flavorData, options);
+
+        // Create chart for toppings
+        const toppingData = new google.visualization.DataTable();
+        toppingData.addColumn('string', 'topping');
+        toppingData.addColumn('number', 'votes');
+        Object.keys(voteData.toppingVotes).forEach((topping) => {
+            toppingData.addRow([topping, voteData.toppingVotes[topping]]);
+        });
+
+        const toppingChart = new google.visualization.PieChart(
+            document.getElementById('topping-chart'));
+        toppingChart.draw(toppingData, options);
+    });
+}
+
+/**
  * Shows map on page.
  */
  function initMap() {
