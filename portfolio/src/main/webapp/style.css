@@ -229,6 +229,7 @@ p {
     font-family: 'Josefin Sans', sans-serif;
 }
 
+/* The following fixes a bug that causes the chart info box to flicker */
 svg > g:last-child > g:last-child { 
     pointer-events: none 
 }
