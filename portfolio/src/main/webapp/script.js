@@ -153,7 +153,7 @@ async function deleteComments() {
  * Shows map on page.
  */
  function initMap() {
-  // The map, centered at Uluru
+  // The map, centered at Oak Park
     var map = new google.maps.Map(
       document.getElementById('custom-map'), {
           zoom: 13, 
@@ -162,7 +162,7 @@ async function deleteComments() {
           styles: stylesArray
         });
 
-  // Location Markers
+  // Location markers of restaurants with info windows
     var sweetmonster = new google.maps.Marker({
       position: {lat: 41.86538, lng: -87.78914}, 
       map: map, 
@@ -237,7 +237,7 @@ async function deleteComments() {
  }
 
 /**
- * Array containing all of the style customizations.
+ * Array containing all of the map style customizations.
  */
  var stylesArray = [
   {
