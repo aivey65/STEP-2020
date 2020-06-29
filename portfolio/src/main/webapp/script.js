@@ -111,6 +111,13 @@ function diamondDescriptionUpdate(hitCount) {
 }
 
 /**
+ * Function that calls all of the onload functions.
+ */
+function onload() {
+    displayComments();
+}
+
+/**
 * Function that recieves the indicated number of comments from datastore and displays the result after formatting.
 */
 function displayComments() {
@@ -141,3 +148,188 @@ async function deleteComments() {
     await fetch('/delete-data');
     displayComments();
 }
+
+/**
+ * Shows map on page.
+ */
+ function initMap() {
+  // The map, centered at Oak Park
+    var map = new google.maps.Map(
+      document.getElementById('custom-map'), {
+          zoom: 13, 
+          center: {lat: 41.88831, lng: -87.7901},
+          backgroundColor: "#ffdfba",
+          styles: stylesArray
+        });
+
+  // Location markers of restaurants with info windows
+    var sweetmonster = new google.maps.Marker({
+      position: {lat: 41.86538, lng: -87.78914}, 
+      map: map, 
+      title: "Sweet Monster"
+    });
+    sweetmonster.addListener('click', function() {
+      new google.maps.InfoWindow({
+          content: "<h1>Sweet Monster</h1><p>Sweet Monster is a cute little shop that sells rolled ice cream" +
+          " and boba tea. It's only open during the summer, so I do not go here often.</p>"
+      }).open(map, sweetmonster);
+    });
+
+    var pokeburrito = new google.maps.Marker({
+      position: {lat: 41.88847, lng: -87.80151},
+      map: map,
+      title: "Poke Burrito"
+    });
+    pokeburrito.addListener('click', function() {
+      new google.maps.InfoWindow({
+          content: "<h1>Poke Burrito</h1><p>Poke Burrito is where I order my poke bowls. I usually order mine" +
+          " with raw tuna, avocado, cucumber and other delicious toppings! It's expensive, but one of my favorites.</p>"
+      }).open(map, pokeburrito);
+    });
+
+    var newpot = new google.maps.Marker({
+      position: {lat: 41.88835, lng: -87.79391},
+      map: map,
+      title: "New Pot"
+    });
+    newpot.addListener('click', function() {
+      new google.maps.InfoWindow({
+          content: "<h1>New Pot</h1><p>New Pot has Thai food. My family has been ordering from them pretty regularly" +
+          " for years now. I love thai food, especially thai noodles and curries.</p>"
+      }).open(map, newpot);
+    });
+
+    var tacobros = new google.maps.Marker({
+      position: {lat: 41.89485, lng: -87.77539},
+      map: map,
+      title: "Taco Bros"
+    });
+    tacobros.addListener('click', function() {
+      new google.maps.InfoWindow({
+          content: "<h1>Taco Bros</h1><p>Taco Bros is a small taco place that makes really good tacos. It is my go-to" +
+          " taco place to order from. </p>"
+      }).open(map, tacobros);
+    });
+
+    var coldstone = new google.maps.Marker({
+      position: {lat: 41.88853, lng: -87.80234},
+      map: map,
+      title: "Coldstone"
+    });
+    coldstone.addListener('click', function() {
+      new google.maps.InfoWindow({
+          content: "<h1>Coldstone</h1><p>Coldstone is my favorite place to get ice cream in Oak Park. The reason for that" +
+          " is because I can get my favorite dessert combo there: Coffee ice cream with brownies mixed in. There is no better flavor.</p>"
+      }).open(map, coldstone);
+    });
+
+    var bossburrito = new google.maps.Marker({
+      position: {lat: 41.88797, lng: -87.80290},
+      map: map,
+      title: "Boss Burrito"
+    });
+    bossburrito.addListener('click', function() {
+      new google.maps.InfoWindow({
+          content: "<h1>Boss Burrito</h1><p>Boss Burrito is another good place to get tacos. It has also been around longer than" +
+          " Taco Bros. If ever I find my self in this part of Oak Park, this is my choice for a casual eating experience.</p>"
+      }).open(map, bossburrito);
+    });
+ }
+
+/**
+ * Array containing all of the map style customizations.
+ */
+ var stylesArray = [
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#6f6d6d"
+      },
+      {
+        "weight": 2.5
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffffba"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffb3ba"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffdfba"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.province",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffffba"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.natural",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#baffc9"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bae1ff"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#baffc9"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffdfba"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffdfba"
+      }
+    ]
+  }
+]
