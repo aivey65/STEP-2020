@@ -44,7 +44,6 @@ public class TeaVoteServlet extends HttpServlet {
             flavorVoteEntity.setProperty("flavor", flavor);
             flavorVoteEntity.setProperty("votes", 1);
         } else {
-            //Entity does exist. Add one to existing votes property.
             flavorVoteEntity.setProperty("votes", ((long) flavorVoteEntity.getProperty("votes")) + 1);
         }
 
@@ -61,12 +60,10 @@ public class TeaVoteServlet extends HttpServlet {
             toppingVoteEntity.setProperty("topping", topping);
             toppingVoteEntity.setProperty("votes", 1);
         } else {
-            //Entity does exist. Add one to existing votes property.
             toppingVoteEntity.setProperty("votes", ((long) toppingVoteEntity.getProperty("votes")) + 1);
         }
-        
-        datastore.put(toppingVoteEntity);
 
+        datastore.put(toppingVoteEntity);
         response.sendRedirect("/index.html");
     }
 
