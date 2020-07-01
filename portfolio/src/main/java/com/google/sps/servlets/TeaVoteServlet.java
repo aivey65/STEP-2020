@@ -16,7 +16,10 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,32 +35,69 @@ public class TeaVoteServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //Update or add flavor entity.
         String flavor = request.getParameter("flavor");
+        Query flavorQuery = new Query("FlavorVote").setFilter(
+            new Query.FilterPredicate("flavor", Query.FilterOperator.EQUAL, flavor));
+        Entity flavorVoteEntity = datastore.prepare(flavorQuery).asSingleEntity();
+        long totalFlavorVotes = 0;
+
+        if (flavorVoteEntity != null) {
+            totalFlavorVotes = (long) flavorVoteEntity.getProperty("votes");
+        } else {
+            //Flavor entity does not exist. Create a new one.
+            flavorVoteEntity = new Entity("FlavorVote");
+        }
+
+        flavorVoteEntity.setProperty("flavor", flavor);
+        flavorVoteEntity.setProperty("votes", totalFlavorVotes + 1);
+
+        //Update or add topping entity.
         String topping = request.getParameter("topping");
+        Query toppingQuery = new Query("ToppingVote").setFilter(
+            new Query.FilterPredicate("topping", Query.FilterOperator.EQUAL, topping));
+        Entity toppingVoteEntity = datastore.prepare(toppingQuery).asSingleEntity();
+        long totalToppingVotes = 0;
 
-        Entity voteEntity = new Entity("TeaVote");
-        voteEntity.setProperty("flavor", flavor);
-        voteEntity.setProperty("topping", topping);
+         if (toppingVoteEntity != null) {
+            totalToppingVotes = (long) toppingVoteEntity.getProperty("votes");
+        } else {
+            //Topping entity does not exist. Create a new one.
+            toppingVoteEntity = new Entity("ToppingVote");
+        }
 
-        datastore.put(voteEntity);
+        toppingVoteEntity.setProperty("topping", topping);
+        toppingVoteEntity.setProperty("votes", totalToppingVotes + 1);
+
+        datastore.put(flavorVoteEntity);
+        datastore.put(toppingVoteEntity);
         response.sendRedirect("/index.html");
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Query query = new Query("TeaVote");
-        Iterable<Entity> results = datastore.prepare(query).asIterable();
-        
-        HashMap<String, Integer> flavorVotes = new HashMap<String, Integer>();
-        HashMap<String, Integer> toppingVotes = new HashMap<String, Integer>();
+        //Creating hashmap of flavors and votes.
+        Iterable<Entity> flavorResults = datastore.prepare(new Query("FlavorVote")).asIterable();
+        HashMap<String, Long> flavorVotes = new HashMap<String, Long>();
 
-        for (Entity entity : results) {
+        for (Entity entity : flavorResults) {
             String flavor = (String) entity.getProperty("flavor");
-            String topping = (String) entity.getProperty("topping");
+            long votes = (long) entity.getProperty("votes");
 
-            flavorVotes.put(flavor, flavorVotes.getOrDefault(flavor, 0) + 1);
-            toppingVotes.put(topping, toppingVotes.getOrDefault(topping, 0) + 1);
+            flavorVotes.put(flavor, votes);
         }
+
+        //Creating hashmap of toppings and votes.
+        Iterable<Entity> toppingResults = datastore.prepare(new Query("ToppingVote")).asIterable();
+        HashMap<String, Long> toppingVotes = new HashMap<String, Long>();
+
+        for (Entity entity : toppingResults) {
+            String topping = (String) entity.getProperty("topping");
+            long votes = (long) entity.getProperty("votes");
+
+            toppingVotes.put(topping, votes);
+        }
+
         
         Gson gson = new Gson();
         String flavorVotesJsonString = gson.toJson(flavorVotes);
