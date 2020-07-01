@@ -38,45 +38,37 @@ public class TeaVoteServlet extends HttpServlet {
         Query flavorQuery = new Query("FlavorVote").setFilter(
             new Query.FilterPredicate("flavor", Query.FilterOperator.EQUAL, flavor));
         Entity flavorVoteEntity = datastore.prepare(flavorQuery).asSingleEntity();
-        long totalFlavorVotes = 0;
 
-        if (flavorVoteEntity != null) {
-            totalFlavorVotes = (long) flavorVoteEntity.getProperty("votes");
-        } else {
-            //Flavor entity does not exist. Create a new one.
+        if (flavorVoteEntity == null) {
             flavorVoteEntity = new Entity("FlavorVote");
+            flavorVoteEntity.setProperty("flavor", flavor);
         }
 
-        flavorVoteEntity.setProperty("flavor", flavor);
-        flavorVoteEntity.setProperty("votes", totalFlavorVotes + 1);
+        flavorVoteEntity.setProperty("votes", ((long) flavorVoteEntity.getProperty("votes")) + 1);
+        datastore.put(flavorVoteEntity);
 
         //Update or add topping entity.
         String topping = request.getParameter("topping");
         Query toppingQuery = new Query("ToppingVote").setFilter(
             new Query.FilterPredicate("topping", Query.FilterOperator.EQUAL, topping));
         Entity toppingVoteEntity = datastore.prepare(toppingQuery).asSingleEntity();
-        long totalToppingVotes = 0;
 
-         if (toppingVoteEntity != null) {
-            totalToppingVotes = (long) toppingVoteEntity.getProperty("votes");
-        } else {
-            //Topping entity does not exist. Create a new one.
+        if (toppingVoteEntity == null) {
             toppingVoteEntity = new Entity("ToppingVote");
+            toppingVoteEntity.setProperty("topping", topping);
         }
 
-        toppingVoteEntity.setProperty("topping", topping);
-        toppingVoteEntity.setProperty("votes", totalToppingVotes + 1);
-
-        datastore.put(flavorVoteEntity);
+        toppingVoteEntity.setProperty("votes", ((long) toppingVoteEntity.getProperty("votes")) + 1);
         datastore.put(toppingVoteEntity);
+        
         response.sendRedirect("/index.html");
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //Creating hashmap of flavors and votes.
-        Iterable<Entity> flavorResults = datastore.prepare(new Query("FlavorVote")).asIterable();
         HashMap<String, Long> flavorVotes = new HashMap<String, Long>();
+        Iterable<Entity> flavorResults = datastore.prepare(new Query("FlavorVote")).asIterable();
 
         for (Entity entity : flavorResults) {
             String flavor = (String) entity.getProperty("flavor");
@@ -86,16 +78,15 @@ public class TeaVoteServlet extends HttpServlet {
         }
 
         //Creating hashmap of toppings and votes.
-        Iterable<Entity> toppingResults = datastore.prepare(new Query("ToppingVote")).asIterable();
         HashMap<String, Long> toppingVotes = new HashMap<String, Long>();
-
+        Iterable<Entity> toppingResults = datastore.prepare(new Query("ToppingVote")).asIterable();
+        
         for (Entity entity : toppingResults) {
             String topping = (String) entity.getProperty("topping");
             long votes = (long) entity.getProperty("votes");
 
             toppingVotes.put(topping, votes);
         }
-
         
         Gson gson = new Gson();
         String flavorVotesJsonString = gson.toJson(flavorVotes);
