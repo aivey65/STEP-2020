@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet stores and retrieves data about favorite milk tea flavors. */
-@WebServlet("/pie-chart")
-public class PieChartServlet extends HttpServlet {
+@WebServlet("/tea-vote")
+public class TeaVoteServlet extends HttpServlet {
     private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     @Override
@@ -35,7 +35,7 @@ public class PieChartServlet extends HttpServlet {
         String flavor = request.getParameter("flavor");
         String topping = request.getParameter("topping");
 
-        Entity voteEntity = new Entity("BobaVote");
+        Entity voteEntity = new Entity("TeaVote");
         voteEntity.setProperty("flavor", flavor);
         voteEntity.setProperty("topping", topping);
 
@@ -45,7 +45,7 @@ public class PieChartServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Query query = new Query("BobaVote");
+        Query query = new Query("TeaVote");
         Iterable<Entity> results = datastore.prepare(query).asIterable();
         
         HashMap<String, Integer> flavorVotes = new HashMap<String, Integer>();

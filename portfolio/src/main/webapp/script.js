@@ -153,7 +153,7 @@ async function deleteComments() {
  * Creates a chart to visualize user data about boba.
  */
 function displayPieChart() {
-    fetch('/pie-chart').then(response => response.json()).then((voteData) => {
+    fetch('/tea-vote').then(response => response.json()).then((voteData) => {
         //Options used to create the two charts
         const options = {
             pieHole: 0.4,
