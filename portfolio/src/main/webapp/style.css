@@ -126,14 +126,13 @@ h3 {
 
 #gif-info {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 }
 
 #right-side {
     width: 350px;
     margin-left: 50px;
     margin-right: 50px;
-    text-align: center;
 }
 
 .orange {
@@ -220,4 +219,17 @@ textarea {
 
 .button:hover {
     cursor: cell;
+}
+
+h1 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+p {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* The following fixes a bug that causes the chart info box to flicker */
+svg > g:last-child > g:last-child { 
+    pointer-events: none 
 }
