@@ -46,10 +46,9 @@ public final class FindMeetingQuery {
 
         List<TimeRange> meetingTimes = findAvailableTimes(conflictTimesIncludingOptional, request.getDuration());
         if (meetingTimes.isEmpty()) {
-            if (request.getAttendees().isEmpty() && !request.getOptionalAttendees().isEmpty()) {
-                return meetingTimes;
+            if (!request.getAttendees().isEmpty() || request.getOptionalAttendees().isEmpty()) {
+                meetingTimes = findAvailableTimes(conflictTimes, request.getDuration());
             }
-            return findAvailableTimes(conflictTimes, request.getDuration());
         }
         return meetingTimes;
     }
