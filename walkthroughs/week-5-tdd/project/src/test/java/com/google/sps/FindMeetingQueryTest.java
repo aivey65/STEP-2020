@@ -291,7 +291,7 @@ public final class FindMeetingQueryTest {
   @Test
   public void justEnoughRoom_IgnoreOptionalPersonB() {
     // Have one person, but make it so that there is just enough room at one point in the day to
-    // have the meeting.
+    // have the meeting. Ignore optional person B in order to still have a meeting time.
     //
     // Events  : |--A--|     |----A----|
     //                 |--B-|
@@ -342,8 +342,8 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noMandatoryAttendees_FindGaps() {
-    // Have each person have different events. We should see three options because each person has
+  public void noMandatoryAttendees_IncludesOptionalAttendees() {
+    // Have each optional person have different events. We should see three options because each person has
     // split the restricted times.
     //
     // Events  :       |--A--|     |--B--|
