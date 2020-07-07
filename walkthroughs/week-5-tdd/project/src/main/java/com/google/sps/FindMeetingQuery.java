@@ -24,7 +24,7 @@ import java.util.Collections;
 public final class FindMeetingQuery {
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
         if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
-            return new ArrayList<TimeRange>();
+            return Collections.emptyList();
         }
 
         List<TimeRange> conflictTimes = new ArrayList<TimeRange>();
@@ -46,6 +46,9 @@ public final class FindMeetingQuery {
 
         List<TimeRange> meetingTimes = findAvailableTimes(conflictTimesIncludingOptional, request.getDuration());
         if (meetingTimes.isEmpty()) {
+            if (request.getAttendees().isEmpty() && !request.getOptionalAttendees().isEmpty()) {
+                return meetingTimes;
+            }
             return findAvailableTimes(conflictTimes, request.getDuration());
         }
         return meetingTimes;
